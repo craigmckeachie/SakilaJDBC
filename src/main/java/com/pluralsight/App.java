@@ -16,12 +16,17 @@ public class App {
         // define your query
         String query = """
                         SELECT title, description, release_year, length
-                        FROM film;
+                        FROM film
+                        WHERE title LIKE ?
                         """;
 
         // create statement
         // the statement is tied to the open connection
         PreparedStatement statement = connection.prepareStatement(query);
+
+        String searchTerm = "%AIR%";
+        //set parameters
+        statement.setString(1,  searchTerm);
 
         // 2. Execute your query
         ResultSet results = statement.executeQuery();
